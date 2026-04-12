@@ -331,7 +331,7 @@ export default function BottomPlayer() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0, height: expanded ? '100dvh' : '65px', borderRadius: expanded ? '0px' : '40px' }}
         transition={{ type: 'spring', damping: 40, stiffness: 350 }}
-        className={`z-[150] shadow-2xl flex flex-col overflow-hidden ${expanded ? 'fixed inset-0 w-full bg-[#0a0a0c]' : 'fixed bottom-2 md:bottom-4 inset-x-0 mx-auto w-[calc(100%-1rem)] md:w-full max-w-4xl bg-black/80 backdrop-blur-xl border border-white/10 px-3 md:px-4'}`}
+        className={`z-[150] shadow-2xl flex flex-col overflow-hidden ${expanded ? 'fixed inset-0 w-full bg-[#0a0a0c]' : 'fixed bottom-20 md:bottom-4 inset-x-0 mx-auto w-[calc(100%-1rem)] md:w-full max-w-4xl bg-black/80 backdrop-blur-xl border border-white/10 px-3 md:px-4'}`}
       >
         <div id="youtube-player-hidden" className="hidden" />
 

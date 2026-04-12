@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 import RightSidebar from './RightSidebar';
 import BottomPlayer from './BottomPlayer';
 import PageTransition from './PageTransition';
+import MobileNav from './MobileNav';
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -34,11 +35,12 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   return (
     <div className="w-full max-w-[1440px] h-[calc(100vh-60px)] md:glass-pane md:rounded-[40px] flex overflow-hidden relative border-none md:border md:border-white/10 md:shadow-2xl">
       <Sidebar />
-      <main id="MAIN_CONTENT_AREA" className="flex-1 w-full max-w-full overflow-x-hidden overflow-y-auto relative bg-[#0a0a0c] md:bg-black/20">
+      <main id="MAIN_CONTENT_AREA" className="flex-1 w-full max-w-full overflow-x-hidden overflow-y-auto relative bg-[#0a0a0c] md:bg-black/20 pb-36 md:pb-0">
         <PageTransition>{children}</PageTransition>
       </main>
       <RightSidebar />
       <BottomPlayer />
+      <MobileNav />
     </div>
   );
 }
