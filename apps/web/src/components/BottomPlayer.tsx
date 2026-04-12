@@ -87,7 +87,6 @@ const MemoizedLyrics = React.memo(({
           ))
         ) : (
           <div className="flex flex-col items-center justify-center py-10 text-center space-y-4">
-            {/* @ts-ignore */}
             <Music className="w-8 h-8 text-white/5" />
             <p className="text-sm font-black tracking-tight text-white/20 uppercase">Lyrics Unavailable</p>
           </div>
@@ -369,7 +368,6 @@ export default function BottomPlayer() {
               </div>
               <div className="min-w-0">
                 <p className="font-bold text-[12px] text-white truncate">{currentTrack.title}</p>
-                {/* @ts-ignore - bypassing production type mismatch */}
                 <Link 
                   href={`/artist/${encodeURIComponent(currentTrack.artist)}`} 
                   onClick={e => e.stopPropagation()} 
@@ -442,7 +440,6 @@ export default function BottomPlayer() {
                            <div className="space-y-1">
                               <h1 className="text-4xl font-black text-white tracking-tighter leading-tight">{currentTrack.title}</h1>
                               <div className="flex items-center gap-2">
-                                 {/* @ts-ignore - bypassing production type mismatch */}
                                  <Link 
                                    href={`/artist/${encodeURIComponent(currentTrack.artist)}`}
                                    onClick={() => setExpanded(false)}

@@ -60,7 +60,6 @@ export default function ProfileModal({ open, onClose }: { open: boolean; onClose
             {/* Audio Quality */}
             <div className="mb-3">
               <div className="flex items-center gap-1.5 mb-1.5 text-[var(--text-muted)]">
-                {/* @ts-ignore */}
                 <Music className="w-3 h-3" />
                 <span className="text-[9px] font-bold uppercase tracking-widest">Quality</span>
               </div>
