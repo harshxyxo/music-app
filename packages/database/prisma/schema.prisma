@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  username  String   @unique
+  password  String
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  playlists Playlist[]
+  likes     UserLike[]
+}
+
+model Artist {
+  id        String   @id @default(uuid())
+  name      String
+  bio       String?
+  image     String?
+  verified  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  
+  albums    Album[]
+  tracks    Track[]
+}
+
+model Album {
+  id          String   @id @default(uuid())
+  title       String
+  artistId    String
+  artist      Artist   @relation(fields: [artistId], references: [id])
+  releaseDate DateTime
+  coverImage  String?
+  type        String   @default("ALBUM") // ALBUM, EP, SINGLE
+  createdAt   DateTime @default(now())
+
+  tracks      Track[]
+}
+
+model Track {
+  id          String   @id @default(uuid())
+  title       String
+  durationMs  Int
+  audioUrl    String   // S3 URI
+  albumId     String
+  album       Album    @relation(fields: [albumId], references: [id])
+  artistId    String
+  artist      Artist   @relation(fields: [artistId], references: [id])
+  streamCount Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  playlistTracks PlaylistTrack[]
+  likes          UserLike[]
+}
+
+model Playlist {
+  id          String   @id @default(uuid())
+  title       String
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  isPublic    Boolean  @default(true)
+  coverImage  String?
+  createdAt   DateTime @default(now())
+
+  tracks      PlaylistTrack[]
+}
+
+model PlaylistTrack {
+  id         String   @id @default(uuid())
+  playlistId String
+  playlist   Playlist @relation(fields: [playlistId], references: [id])
+  trackId    String
+  track      Track    @relation(fields: [trackId], references: [id])
+  addedAt    DateTime @default(now())
+
+  @@unique([playlistId, trackId])
+}
+
+model UserLike {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  trackId   String
+  track     Track    @relation(fields: [trackId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, trackId])
+}

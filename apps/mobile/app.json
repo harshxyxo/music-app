@@ -1,0 +1,22 @@
+{
+  "expo": {
+    "name": "Groovra",
+    "slug": "groovra-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0f0f13",
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIBackgroundModes": ["audio"]
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0f0f13"
+      }
+    },
+    "plugins": []
+  }
+}
