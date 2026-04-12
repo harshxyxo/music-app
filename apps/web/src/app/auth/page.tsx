@@ -80,14 +80,25 @@ export default function AuthPage() {
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const appVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-        'size': 'invisible'
-      });
+      // Reuse existing RecaptchaVerifier or create a new one (prevents double-render)
+      if (!(window as any).recaptchaVerifier) {
+        (window as any).recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+          'size': 'invisible',
+        });
+      }
+      const appVerifier = (window as any).recaptchaVerifier;
       const result = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
       setConfirmationResult(result);
       setAuthMode('otp');
     } catch (error: any) {
       console.error('Firebase Phone Auth (Send OTP) Error:', error);
+      // Clear the stale verifier so a fresh one can be created on retry
+      if ((window as any).recaptchaVerifier) {
+        try {
+          (window as any).recaptchaVerifier.clear();
+        } catch (_) { /* already cleared */ }
+        (window as any).recaptchaVerifier = null;
+      }
       alert(error.message);
     }
   };
