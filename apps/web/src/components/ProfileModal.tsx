@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Volume2, Music, User, LogOut, ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { usePlayerStore } from '../store/usePlayerStore';
-import { auth, signOut } from '../lib/firebase';
-import { onAuthStateChanged, User as FBUser } from 'firebase/auth';
+import { auth } from '../lib/firebase';
+import { onAuthStateChanged, User as FBUser, signOut } from 'firebase/auth';
 import Link from 'next/link';
 
 export default function ProfileModal({ open, onClose }: { open: boolean; onClose: () => void }) {
@@ -59,7 +59,11 @@ export default function ProfileModal({ open, onClose }: { open: boolean; onClose
 
             {/* Audio Quality */}
             <div className="mb-3">
-              <div className="flex items-center gap-1.5 mb-1.5 text-[var(--text-muted)]"><Music className="w-3 h-3" /><span className="text-[9px] font-bold uppercase tracking-widest">Quality</span></div>
+              <div className="flex items-center gap-1.5 mb-1.5 text-[var(--text-muted)]">
+                {/* @ts-ignore */}
+                <Music className="w-3 h-3" />
+                <span className="text-[9px] font-bold uppercase tracking-widest">Quality</span>
+              </div>
               <div className="flex gap-1">
                 {(['auto', 'high', 'low'] as const).map(q => (
                   <button key={q} onClick={() => setQuality(q)} className={`flex-1 px-2 py-1.5 rounded-lg text-[9px] font-bold transition-all ${quality === q ? 'bg-[var(--accent-green)] text-white' : 'bg-black/[0.03] text-[var(--text-muted)] hover:bg-black/[0.06]'}`}>

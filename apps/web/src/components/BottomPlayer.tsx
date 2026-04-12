@@ -87,6 +87,7 @@ const MemoizedLyrics = React.memo(({
           ))
         ) : (
           <div className="flex flex-col items-center justify-center py-10 text-center space-y-4">
+            {/* @ts-ignore */}
             <Music className="w-8 h-8 text-white/5" />
             <p className="text-sm font-black tracking-tight text-white/20 uppercase">Lyrics Unavailable</p>
           </div>
@@ -166,7 +167,7 @@ export default function BottomPlayer() {
     if (!videoId) return;
 
     const initPlayer = () => {
-      if (!videoId || !window.YT?.Player) return;
+      if (!videoId || !(window as any).YT?.Player) return;
       if (playerRef.current?.loadVideoById) {
         playerRef.current.loadVideoById(videoId);
         if (isPlaying) playerRef.current.playVideo();
