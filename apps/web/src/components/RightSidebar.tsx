@@ -35,11 +35,11 @@ export default function RightSidebar() {
   const upNext = useMemo(() => mounted ? queue.filter(t => t.id !== currentTrack?.id).slice(0, 5) : [], [mounted, queue, currentTrack]);
   const related = useMemo(() => mounted ? shuffle([...queue]).slice(0, 6) : [], [mounted, queue]);
 
-  if (!mounted) return <aside className="w-[320px] flex-shrink-0 bg-black/40 border-l border-white/5" />;
+  if (!mounted) return <aside className="hidden lg:flex w-[320px] flex-shrink-0 bg-black/40 border-l border-white/5" />;
 
   return (
     <aside 
-      className="w-[320px] flex-shrink-0 bg-black/60 backdrop-blur-[60px] flex flex-col h-full overflow-hidden relative outline-none"
+      className="hidden lg:flex w-[320px] flex-shrink-0 bg-black/60 backdrop-blur-[60px] flex-col h-full overflow-hidden relative outline-none"
       tabIndex={0}
       onMouseEnter={(e) => e.currentTarget.focus()}
     >

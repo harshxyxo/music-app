@@ -331,7 +331,7 @@ export default function BottomPlayer() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0, height: expanded ? '100dvh' : '65px', borderRadius: expanded ? '0px' : '40px' }}
         transition={{ type: 'spring', damping: 40, stiffness: 350 }}
-        className={`z-[150] shadow-2xl flex flex-col overflow-hidden ${expanded ? 'fixed inset-0 w-full bg-[#0a0a0c]' : 'fixed bottom-4 inset-x-0 mx-auto w-full max-w-4xl bg-black/80 backdrop-blur-xl border border-white/10 px-4'}`}
+        className={`z-[150] shadow-2xl flex flex-col overflow-hidden ${expanded ? 'fixed inset-0 w-full bg-[#0a0a0c]' : 'fixed bottom-2 md:bottom-4 inset-x-0 mx-auto w-[calc(100%-1rem)] md:w-full max-w-4xl bg-black/80 backdrop-blur-xl border border-white/10 px-3 md:px-4'}`}
       >
         <div id="youtube-player-hidden" className="hidden" />
 
@@ -361,12 +361,12 @@ export default function BottomPlayer() {
         </AnimatePresence>
 
         {!expanded ? (
-          <div className="flex items-center justify-between w-full h-full gap-4">
-            <div className="flex items-center gap-3 min-w-[150px] cursor-pointer" onClick={() => setExpanded(true)}>
+          <div className="flex items-center justify-between w-full h-full gap-2 md:gap-4 flex-nowrap">
+            <div className="flex items-center gap-2 md:gap-3 min-w-0 md:min-w-[150px] flex-1 md:flex-none cursor-pointer" onClick={() => setExpanded(true)}>
               <div className="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0">
                 <img src={currentTrack.coverImage} className="w-full h-full aspect-square object-cover" alt="" />
               </div>
-              <div className="min-w-0">
+              <div className="min-w-0 flex-1">
                 <p className="font-bold text-[12px] text-white truncate">{currentTrack.title}</p>
                 <Link 
                   href={`/artist/${encodeURIComponent(currentTrack.artist)}`} 
@@ -377,14 +377,14 @@ export default function BottomPlayer() {
                 </Link>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <button onClick={playPrevious} className="text-white/40 hover:text-white transition-colors"><SkipBack className="w-4 h-4" /></button>
+            <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
+              <button onClick={playPrevious} className="hidden md:block text-white/40 hover:text-white transition-colors"><SkipBack className="w-4 h-4" /></button>
               <button onClick={handleTogglePlay} className="w-9 h-9 rounded-full bg-white flex items-center justify-center hover:scale-110 active:scale-95 transition-all">
                 {isPlaying ? <Pause className="w-4 h-4 text-black fill-current" /> : <Play className="w-4 h-4 text-black fill-current ml-0.5" />}
               </button>
               <button onClick={playNext} className="text-white/40 hover:text-white transition-colors"><SkipForward className="w-4 h-4" /></button>
             </div>
-            <div className="flex-1 relative h-10 bg-white/5 rounded-full overflow-hidden flex items-center px-4 cursor-pointer">
+            <div className="hidden md:flex flex-1 relative h-10 bg-white/5 rounded-full overflow-hidden items-center px-4 cursor-pointer">
                <div className="absolute left-0 top-0 h-full bg-[var(--accent-gold)]/20 transition-all duration-300" style={{ width: `${progressPercent}%` }} />
                 <input type="range" min={0} max={duration || 100} value={isDragging ? seekPos : posValue}
                   onPointerDown={() => setIsDragging(true)}
